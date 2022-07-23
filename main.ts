@@ -40,3 +40,14 @@ for (const entry of rawEntries) {
 }
 
 console.log(entries);
+
+// convert entries to JSON file / write to file
+const jsonData = JSON.stringify(entries);
+try {
+  await Deno.writeTextFile(`./data/json/${today}.json`, jsonData);
+} catch (e) {
+  console.error(e);
+}
+
+// convertToMarkdown: entries -> Markdown string
+// convertToHtml: entries -> HTML string
