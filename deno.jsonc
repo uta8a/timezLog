@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "echo": "echo test!",
+    "ci": "echo ci!"
+  }
+}
