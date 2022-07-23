@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "echo": "echo test!",
+    "run": "deno run --allow-net --allow-env --allow-write main.ts",
     "ci": "echo ci!"
   }
 }
