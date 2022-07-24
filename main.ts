@@ -2,6 +2,7 @@ import env from "./src/util/env.ts";
 import { dayjs, duration, relativeTime, timezone, utc } from "./deps.ts";
 import { getEntry } from "./src/api.ts";
 import { Entry } from "./types.ts";
+import { convertToMarkdown } from "./src/convert/md.ts";
 
 /** dayjs timezone settings */
 /** usage: dayjs(entry.start).tz().format() */
@@ -10,7 +11,7 @@ dayjs.extend(timezone);
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 dayjs.tz.setDefault("Asia/Tokyo");
-const today = dayjs().tz().format("YYYY-MM-DD");
+const today = dayjs().tz().format("YYYY-MM-DD") as string;
 
 /** load environment value */
 // const WORKSPACE_ID = env("WORKSPACE_ID");
@@ -50,4 +51,12 @@ try {
 }
 
 // convertToMarkdown: entries -> Markdown string
+
+const mdData = convertToMarkdown(entries);
+try {
+  await Deno.writeTextFile(`./data/md/${today}.md`, mdData);
+} catch (e) {
+  console.error(e);
+}
+
 // convertToHtml: entries -> HTML string
