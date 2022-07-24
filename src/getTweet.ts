@@ -12,7 +12,6 @@ const getTweets = async () => {
   const yesterday = dayjs().tz().subtract(1, "day").format(
     "YYYY-MM-DD",
   ) as string;
-  console.log(`[log] ${today} ${yesterday}`);
   const res = await fetch("https://api.twitter.com/1.1/guest/activate.json", {
     method: "POST",
     headers: {

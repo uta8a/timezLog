@@ -42,21 +42,19 @@ for (const entry of rawEntries) {
   });
 }
 
-// console.log(entries);
 
-// convert entries to JSON file / write to file
-const jsonData = JSON.stringify(entries);
+// Convert raw data to JSON file
+const tweets = await getTweets();
 try {
-  await Deno.writeTextFile(`./data/json/${yesterday}.json`, jsonData);
+  await Deno.writeTextFile(`./data/json/${yesterday}.json`, JSON.stringify(entries));
+  await Deno.writeTextFile(`./data/tw/${yesterday}.json`, JSON.stringify(tweets));
 } catch (e) {
   console.error(e);
 }
 
 // convertToMarkdown: entries -> Markdown string
 
-const tweetData = await getTweets();
-const mdData = convertToMarkdown(entries, tweetData);
-
+const mdData = convertToMarkdown(entries, tweets);
 try {
   await Deno.writeTextFile(`./data/md/${yesterday}.md`, mdData);
 } catch (e) {
