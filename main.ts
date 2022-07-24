@@ -42,12 +42,17 @@ for (const entry of rawEntries) {
   });
 }
 
-
 // Convert raw data to JSON file
 const tweets = await getTweets();
 try {
-  await Deno.writeTextFile(`./data/json/${yesterday}.json`, JSON.stringify(entries));
-  await Deno.writeTextFile(`./data/tw/${yesterday}.json`, JSON.stringify(tweets));
+  await Deno.writeTextFile(
+    `./data/json/${yesterday}.json`,
+    JSON.stringify(entries),
+  );
+  await Deno.writeTextFile(
+    `./data/tw/${yesterday}.json`,
+    JSON.stringify(tweets),
+  );
 } catch (e) {
   console.error(e);
 }
