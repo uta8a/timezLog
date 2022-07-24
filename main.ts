@@ -12,13 +12,14 @@ dayjs.extend(timezone);
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 dayjs.tz.setDefault("Asia/Tokyo");
-const today = dayjs().tz().format("YYYY-MM-DD") as string;
-
+const yesterday = dayjs().tz().subtract(1, "day").format(
+  "YYYY-MM-DD",
+) as string;
 /** load environment value */
 // const WORKSPACE_ID = env("WORKSPACE_ID");
 const API_KEY = env("API_KEY");
 
-const rawEntries = await getEntry(today, API_KEY);
+const rawEntries = await getEntry(yesterday, API_KEY);
 const entries: Entry[] = [];
 for (const entry of rawEntries) {
   // スクリプトが動いている時に実行中のEntryは、現在時刻を終わりとみなす
@@ -46,7 +47,7 @@ for (const entry of rawEntries) {
 // convert entries to JSON file / write to file
 const jsonData = JSON.stringify(entries);
 try {
-  await Deno.writeTextFile(`./data/json/${today}.json`, jsonData);
+  await Deno.writeTextFile(`./data/json/${yesterday}.json`, jsonData);
 } catch (e) {
   console.error(e);
 }
@@ -57,7 +58,7 @@ const tweetData = await getTweets();
 const mdData = convertToMarkdown(entries, tweetData);
 
 try {
-  await Deno.writeTextFile(`./data/md/${today}.md`, mdData);
+  await Deno.writeTextFile(`./data/md/${yesterday}.md`, mdData);
 } catch (e) {
   console.error(e);
 }

@@ -8,9 +8,11 @@ dayjs.extend(relativeTime);
 dayjs.tz.setDefault("Asia/Tokyo");
 
 const convertToMarkdown = (entries: Entry[], tweets: Tweet[]) => {
-  const today = dayjs().tz().format("YYYY-MM-DD") as string;
+  const yesterday = dayjs().tz().subtract(1, "day").format(
+    "YYYY-MM-DD",
+  ) as string;
   let md = "";
-  md += `# 日報 ${today}\n\n`;
+  md += `# 日報 ${yesterday}\n\n`;
   for (const entry of entries) {
     const startTime = dayjs(entry.start).tz().format("HH:mm") as string;
     const endTime = dayjs(entry.stop).tz().format("HH:mm") as string;
