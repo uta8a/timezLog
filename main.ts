@@ -3,6 +3,7 @@ import { dayjs, duration, relativeTime, timezone, utc } from "./deps.ts";
 import { getEntry } from "./src/api.ts";
 import { Entry } from "./types.ts";
 import { convertToMarkdown } from "./src/convert/md.ts";
+import { getTweets } from "./src/getTweet.ts";
 
 /** dayjs timezone settings */
 /** usage: dayjs(entry.start).tz().format() */
@@ -40,7 +41,7 @@ for (const entry of rawEntries) {
   });
 }
 
-console.log(entries);
+// console.log(entries);
 
 // convert entries to JSON file / write to file
 const jsonData = JSON.stringify(entries);
@@ -52,11 +53,11 @@ try {
 
 // convertToMarkdown: entries -> Markdown string
 
-const mdData = convertToMarkdown(entries);
+const tweetData = await getTweets();
+const mdData = convertToMarkdown(entries, tweetData);
+
 try {
   await Deno.writeTextFile(`./data/md/${today}.md`, mdData);
 } catch (e) {
   console.error(e);
 }
-
-// convertToHtml: entries -> HTML string
