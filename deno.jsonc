@@ -1,6 +1,7 @@
 {
   "tasks": {
     "run": "deno run --allow-net --allow-env --allow-write main.ts",
+    "fmt": "deno fmt --ignore=data",
     "ci": "echo ci!"
   }
 }
