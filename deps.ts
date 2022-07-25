@@ -9,6 +9,7 @@ import { Marked } from "https://raw.githubusercontent.com/ubersl0th/markdown/v2.
 import { basename } from "https://deno.land/std@0.149.0/path/mod.ts";
 
 export {
+  basename,
   dayjs,
   duration,
   escapeHtml,
@@ -17,5 +18,4 @@ export {
   relativeTime,
   timezone,
   utc,
-  basename,
 };

@@ -1,7 +1,7 @@
 import env from "./src/util/env.ts";
 import { dayjs, duration, relativeTime, timezone, utc } from "./deps.ts";
 import { getEntry } from "./src/api.ts";
-import { Entry, Tweet } from "./types.ts";
+import { Entry } from "./types.ts";
 import { convertToMarkdown } from "./src/convert/md.ts";
 import { convertToHtml, genIndexHtml } from "./src/convert/html.ts";
 import { getTweets } from "./src/getTweet.ts";
@@ -69,14 +69,17 @@ try {
 
 const dailyData = await convertToHtml(entries, tweets);
 try {
-  await Deno.writeTextFile(`./data/pub_html/daily/${yesterday}.html`, dailyData)
+  await Deno.writeTextFile(
+    `./data/pub_html/daily/${yesterday}.html`,
+    dailyData,
+  );
 } catch (e) {
-  console.error(e)
+  console.error(e);
 }
 
 const indexData = await genIndexHtml();
 try {
-  await Deno.writeTextFile(`./data/pub_html/index.html`, indexData)
+  await Deno.writeTextFile(`./data/pub_html/index.html`, indexData);
 } catch (e) {
-  console.error(e)
+  console.error(e);
 }

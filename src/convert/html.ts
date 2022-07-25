@@ -132,17 +132,17 @@ const convertToHtml = async (entries: Entry[], rawTweets: Tweet[]) => {
 
 const genIndexHtml = async () => {
   const isDir = await isExists(`./data/pub_html/daily`);
-  const links: string[] = []
+  const links: string[] = [];
   if (isDir) {
     // listing file in dir
     for await (const file of expandGlob(`./data/pub_html/daily/*.html`)) {
-      const pathname = basename(file.path)
-      links.push(pathname)
+      const pathname = basename(file.path);
+      links.push(pathname);
     }
   }
-  links.sort().reverse()
+  links.sort().reverse();
   const indexData = await handle.renderView("index", { link: links });
   return indexData;
-}
+};
 
 export { convertToHtml, genIndexHtml };
