@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日報</title>
+  <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <header>
+    <h1><a href="/">日報</a></h1>
+  </header>
+  <main>
+    <article>
+      <p class="top-description">これは @kaito_tateyama の日報です。</p>
+      <section id="list">
+        {{#each link}}
+          <div class="list-container">
+            <a href="daily/{{this}}">{{this}}</a>
+          </div>
+        {{/each}}
+      </section>
+    </article>
+  </main>
+</body>
+</html>
