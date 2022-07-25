@@ -1,15 +1,17 @@
-const args = Deno.args
+const args = Deno.args;
 
 if (args.length !== 3) {
-  console.error('Invalid arg length, usage: deno run "$BODY" "$CREATED_AT" "$TITLE"')
-  Deno.exit(1)
+  console.error(
+    'Invalid arg length, usage: deno run "$BODY" "$CREATED_AT" "$TITLE"',
+  );
+  Deno.exit(1);
 }
 
-const body = args[0]
-const created_at = args[1]
-const title = args[2]
+const body = args[0];
+const created_at = args[1];
+const title = args[2];
 
-const md = `---\ncreated_at: ${created_at}\n---\n\n${body}`
+const md = `---\ncreated_at: ${created_at}\n---\n\n${body}`;
 
 // ref. https://medium.com/deno-the-complete-reference/deno-nuggets-generate-a-random-string-80e320d2bc2c
 function getRandomString(s: number) {
@@ -25,10 +27,10 @@ function getRandomString(s: number) {
   return ret;
 }
 
-const filename = getRandomString(10)
+const filename = getRandomString(10);
 
 try {
-  await Deno.mkdir(`./data/issue/${title}`)
+  await Deno.mkdir(`./data/issue/${title}`, { recursive: true });
   await Deno.writeTextFile(`./data/issue/${title}/${filename}.md`, md);
 } catch (e) {
   console.error(e);
