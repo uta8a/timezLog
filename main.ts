@@ -5,7 +5,6 @@ import { Entry } from "./types.ts";
 import { convertToMarkdown } from "./src/convert/md.ts";
 import { convertToHtml, genIndexHtml } from "./src/convert/html.ts";
 import { getTweets } from "./src/getTweet.ts";
-
 /** dayjs timezone settings */
 /** usage: dayjs(entry.start).tz().format() */
 dayjs.extend(utc);

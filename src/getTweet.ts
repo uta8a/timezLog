@@ -7,7 +7,7 @@ dayjs.extend(duration);
 dayjs.extend(relativeTime);
 dayjs.tz.setDefault("Asia/Tokyo");
 
-const getTweets = async () => {
+const getTweets = async (): Promise<Tweet[]> => {
   const today = dayjs().tz().format("YYYY-MM-DD") as string;
   const yesterday = dayjs().tz().subtract(1, "day").format(
     "YYYY-MM-DD",
@@ -44,6 +44,10 @@ const getTweets = async () => {
   const rawTweets = queryData.statuses;
 
   const tweets: Tweet[] = [];
+  if (rawTweets === undefined) {
+    console.error("Error: rawTweets is undefined.");
+    return tweets;
+  }
   for (const tweet of rawTweets) {
     tweets.push({
       date: tweet.created_at,
