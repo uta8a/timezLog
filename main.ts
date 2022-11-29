@@ -4,7 +4,6 @@ import { getEntry } from "./src/api.ts";
 import { Entry } from "./types.ts";
 import { convertToMarkdown } from "./src/convert/md.ts";
 import { convertToHtml, genIndexHtml } from "./src/convert/html.ts";
-import { getTweets } from "./src/getTweet.ts";
 
 /** parse command line args */
 /** WIP */
@@ -51,31 +50,16 @@ for (const entry of rawEntries) {
   });
 }
 
-// Convert raw data to JSON file
-const tweets = await getTweets();
-try {
-  await Deno.writeTextFile(
-    `./data/json/${yesterday}.json`,
-    JSON.stringify(entries),
-  );
-  await Deno.writeTextFile(
-    `./data/tw/${yesterday}.json`,
-    JSON.stringify(tweets),
-  );
-} catch (e) {
-  console.error(e);
-}
-
 // convertToMarkdown: entries -> Markdown string
 
-const mdData = convertToMarkdown(entries, tweets);
+const mdData = convertToMarkdown(entries);
 try {
   await Deno.writeTextFile(`./data/md/${yesterday}.md`, mdData);
 } catch (e) {
   console.error(e);
 }
 
-const dailyData = await convertToHtml(entries, tweets);
+const dailyData = await convertToHtml(entries);
 try {
   await Deno.writeTextFile(
     `./data/pub_html/daily/${yesterday}.html`,

@@ -6,10 +6,4 @@ type Entry = {
   description: string;
 };
 
-type Tweet = {
-  date: string;
-  tweet_id: string;
-  text: string;
-};
-
-export type { Entry, Tweet };
+export type { Entry };
