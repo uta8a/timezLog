@@ -1,12 +1,20 @@
 name: ci
 
 on: [push, pull_request]
+env:
+  DENO_DIR: .deno
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
+      - name: Cache deno deps
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.DENO_DIR }}
+          key: ${{ hashFiles('deno.lock') }}
       - name: Run CI
         run: deno task ci
