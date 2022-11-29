@@ -1,10 +1,19 @@
 import env from "./src/util/env.ts";
-import { dayjs, duration, relativeTime, timezone, utc } from "./deps.ts";
+import { dayjs, duration, parse, relativeTime, timezone, utc } from "./deps.ts";
 import { getEntry } from "./src/api.ts";
 import { Entry } from "./types.ts";
 import { convertToMarkdown } from "./src/convert/md.ts";
 import { convertToHtml, genIndexHtml } from "./src/convert/html.ts";
 import { getTweets } from "./src/getTweet.ts";
+
+/** parse command line args */
+/** WIP */
+const _args = parse(Deno.args);
+// const mdFlag = args.md
+// const jsonFlag = args.json
+// const htmlFlag = args.html
+// const outputFlag = args.out
+
 /** dayjs timezone settings */
 /** usage: dayjs(entry.start).tz().format() */
 dayjs.extend(utc);

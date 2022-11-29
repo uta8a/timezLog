@@ -7,6 +7,7 @@ import { escapeHtml } from "https://deno.land/x/escape/mod.ts";
 import { Handlebars } from "https://deno.land/x/handlebars/mod.ts";
 import { Marked } from "https://raw.githubusercontent.com/ubersl0th/markdown/v2.0.0/mod.ts";
 import { basename } from "https://deno.land/std@0.149.0/path/mod.ts";
+import { parse } from "https://deno.land/std@0.166.0/flags/mod.ts";
 
 export {
   basename,
@@ -15,6 +16,7 @@ export {
   escapeHtml,
   Handlebars,
   Marked,
+  parse,
   relativeTime,
   timezone,
   utc,
