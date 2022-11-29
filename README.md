@@ -5,7 +5,15 @@
 ## 構成
 
 ```sh
+# set toggl API_KEY & toggl WORKSPACE_ID
+export API_KEY="XXXXXX"
+export WORKSPACE_ID="123456"
+# run
 deno task run
+# ci
+deno task ci
+# fmt
+deno task fmt
 ```
 
 で、以下のようにディレクトリを作っておくとデータを配置する。
