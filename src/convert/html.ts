@@ -2,7 +2,6 @@ import { Entry } from "../../types.ts";
 import {
   dayjs,
   duration,
-  escapeHtml,
   Handlebars,
   Marked,
   relativeTime,
