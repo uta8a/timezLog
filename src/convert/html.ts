@@ -1,4 +1,4 @@
-import { Entry, Tweet } from "../../types.ts";
+import { Entry } from "../../types.ts";
 import {
   dayjs,
   duration,
@@ -51,7 +51,7 @@ const handle = new Handlebars({
   compilerOptions: undefined,
 });
 
-const convertToHtml = async (entries: Entry[], rawTweets: Tweet[]) => {
+const convertToHtml = async (entries: Entry[]) => {
   const yesterday = dayjs().tz().subtract(1, "day").format(
     "YYYY-MM-DD",
   ) as string;
@@ -104,16 +104,8 @@ const convertToHtml = async (entries: Entry[], rawTweets: Tweet[]) => {
     }
   }
 
-  const tweets = rawTweets.map((tweet) => {
-    return {
-      date: dayjs(tweet.date).tz().format("HH:mm") as string,
-      tweet_id: tweet.tweet_id,
-      text: escapeHtml(tweet.text),
-    };
-  });
   // sort times, tweets
   times.sort(sortBy);
-  tweets.sort(sortBy);
 
   // const indexData = await handle.renderView("index", { list: "" });
   const dailyData = await handle.renderView("daily", {
@@ -124,8 +116,6 @@ const convertToHtml = async (entries: Entry[], rawTweets: Tweet[]) => {
     toggl: toggl,
     isTimes: times.length !== 0,
     times: times,
-    isTweet: tweets.length !== 0,
-    tweet: tweets,
   });
   return dailyData;
 };

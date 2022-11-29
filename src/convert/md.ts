@@ -1,4 +1,4 @@
-import { Entry, Tweet } from "../../types.ts";
+import { Entry } from "../../types.ts";
 import { dayjs, duration, relativeTime, timezone, utc } from "../../deps.ts";
 
 dayjs.extend(utc);
@@ -7,7 +7,7 @@ dayjs.extend(duration);
 dayjs.extend(relativeTime);
 dayjs.tz.setDefault("Asia/Tokyo");
 
-const convertToMarkdown = (entries: Entry[], tweets: Tweet[]) => {
+const convertToMarkdown = (entries: Entry[]) => {
   const yesterday = dayjs().tz().subtract(1, "day").format(
     "YYYY-MM-DD",
   ) as string;
@@ -18,13 +18,6 @@ const convertToMarkdown = (entries: Entry[], tweets: Tweet[]) => {
     const endTime = dayjs(entry.stop).tz().format("HH:mm") as string;
     md +=
       `${startTime} ~ ${endTime} ${entry.description} (${entry.display_duration})\n`;
-  }
-  md += "\n# Tweet\n\n";
-  for (const tweet of tweets) {
-    const time = dayjs(tweet.date).tz().format("YYYY-MM-DD HH:mm:ss") as string;
-    const text = tweet.text;
-    const id = tweet.tweet_id;
-    md += `---\n${time}\n${text}\nID: ${id}\n---\n\n`;
   }
   return md;
 };
